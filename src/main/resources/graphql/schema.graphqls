@@ -1,0 +1,28 @@
+type Query{   #query is only for getting the data
+    allStudents:[Student]
+    getStudentById(studentId:String!):Student
+}
+type Mutation{  # mutation is used for adding the data into the table
+    addStudentData(studentDao:StudentInput):Student
+    deleteStudentData(studentId:ID!):String
+    updateStudentData(studentId:ID!,studentDao:StudentInput):Student
+}
+
+
+#Schemas
+type Student{
+    studentId:String!
+    studentName:String!
+    address:String!
+    gender:String!
+    department:String!
+    phoneNumber:String!
+}
+
+input StudentInput{
+    studentName:String!
+    address:String!
+    gender:String!
+    department:String!
+    phoneNumber:String!
+}
