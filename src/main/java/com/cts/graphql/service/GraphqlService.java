@@ -5,12 +5,15 @@ import com.cts.graphql.model.GenerateId;
 import com.cts.graphql.model.Student;
 import com.cts.graphql.model.StudentDao;
 import com.cts.graphql.repository.StudentRepo;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.logging.Logger;
 
-@Service
+@Service @Slf4j
 public class GraphqlService {
     @Autowired
     private StudentRepo repo;
@@ -33,11 +36,8 @@ public class GraphqlService {
     public Student updateStudentData(String studentId,StudentDao studentDao) throws NoRecordFoundException {
         Student student=repo.findById(studentId)
                 .orElseThrow(()-> new NoRecordFoundException("Record is not exist with id : "+studentId));
-        student.setStudentName(studentDao.getStudentName());
-        student.setAddress(studentDao.getAddress());
-        student.setDepartment(studentDao.getDepartment());
-        student.setGender(studentDao.getGender());
-        student.setPhoneNumber(studentDao.getPhoneNumber());
+        log.info("Updating the student details wit new data");
+        BeanUtils.copyProperties(studentDao,student);
 
         return repo.save(student);
     }
