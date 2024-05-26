@@ -12,17 +12,17 @@ type Mutation{  # mutation is used for adding the data into the table
 #Schemas
 type Student{
     studentId:String!
-    studentName:String!
-    address:String!
-    gender:String!
-    department:String!
-    phoneNumber:String!
+    studentName:String
+    address:String
+    gender:String
+    department:String
+    phoneNumber:String
 }
 
 input StudentInput{
     studentName:String!
     address:String!
-    gender:String!
-    department:String!
-    phoneNumber:String!
+#    gender:String!
+#    department:String!
+#    phoneNumber:String!
 }
